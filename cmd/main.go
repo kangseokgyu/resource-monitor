@@ -1,20 +1,21 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
+
+	"github.com/kangseokgyu/resource-monitor/memory"
 )
 
 func main() {
-	file, err := os.Open("/proc/meminfo")
+	out, err := memory.Get("vm_stat")
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println(out)
 
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		line := scanner.Text()
-		fmt.Println(line)
+	swap, err1 := memory.Get("sysctl", "vm.swapusage")
+	if err1 != nil {
+		panic(err1)
 	}
+	fmt.Println(swap)
 }
