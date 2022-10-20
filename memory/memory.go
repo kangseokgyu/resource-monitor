@@ -13,7 +13,11 @@ type Stats struct {
 }
 
 func (s Stats) String() string {
-	return fmt.Sprintf("Total: %d, Used: %d(%.1f %%), Free: %d(%.1f %%), Cached: %d(%.1f %%)", s.Total, s.Used, s.UsedPercent, s.Free, s.FreePercent, s.Cached, s.CachedPercent)
+	return fmt.Sprintf("Total: %.2f GB, Used: %.2f GB(%.1f %%), Free: %.2f GB(%.1f %%), Cached: %.2f GB(%.1f %%)",
+		float32(s.Total)/1024/1024/1024,
+		float32(s.Used)/1024/1024/1024, s.UsedPercent,
+		float32(s.Free)/1024/1024/1024, s.FreePercent,
+		float32(s.Cached)/1024/1024/1024, s.CachedPercent)
 }
 
 func Get() (*Stats, error) {
