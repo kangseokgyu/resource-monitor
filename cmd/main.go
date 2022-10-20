@@ -7,15 +7,10 @@ import (
 )
 
 func main() {
-	out, err := memory.Get("vm_stat")
+	out, err := memory.Get()
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(out)
 
-	swap, err1 := memory.Get("sysctl", "vm.swapusage")
-	if err1 != nil {
-		panic(err1)
-	}
-	fmt.Println(swap)
+	fmt.Println(out)
 }
